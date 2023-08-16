@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <title>DartsScorer</title>
+    <meta name="theme-color" content="#172231">
+    <link rel="icon" type="image/x-icon" href="favicon.svg">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main-panel">
+        <div class="top-panel">
+          <div class="info-section">
+            <h2 class="subtitle-string">Game Type</h2>
+            <h2 class="title-string" id="gameType">-</h2>
+          </div>
+          <div class="info-section">
+            <h2 class="subtitle-string">Players</h2>
+            <h2 class="title-string" id="playercount">-</h2>
+          </div>
+          <div class="info-section">
+            <h2 class="subtitle-string" id="playersnames"></h2>
+            <script>
+               window.headerDetails  = function() {
+                const csvData = localStorage.getItem('csvData'); // Retrieve the CSV data from local storage
+                // Split the CSV data into lines
+                const lines = csvData.split('\n');
+                // Get the first line (assuming it contains the header)
+                const headerLine = lines[0];
+                // Split the header line into individual values
+                const headerValues = headerLine.split(',');
+
+                const headerString = headerValues.join(', ');
+                document.getElementById("playersnames").textContent = headerString;
+                document.getElementById("playercount").textContent = headerValues.length;
+
+                const line = csvData.split('\n');
+
+                // Get the second row (index 1) and split it into individual values
+                const secondRowValues = line[1].split(',');
+
+                document.getElementById("gameType").textContent = secondRowValues[0];
+               }
+            </script>
+          </div>
+          <h2 class="button" id="NG">New Game</h2>
+          <svg class="doc-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 231.27 304.86"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M173.45,178.71c9.46,0,17.87,2.1,26.28,5.26V84.1H147.17a21.09,21.09,0,0,1-21-21V0H21A21.08,21.08,0,0,0,0,21V262.81a21.08,21.08,0,0,0,21,21h94.62A71.63,71.63,0,0,1,105.12,247,68.2,68.2,0,0,1,173.45,178.71Z"/><path d="M147.17,73.59h52.56L136.66,0V63.07A10.54,10.54,0,0,0,147.17,73.59Z"/><path d="M173.45,189.22c-31.53,0-57.81,26.28-57.81,57.82s26.28,57.82,57.81,57.82,57.82-26.28,57.82-57.82S205,189.22,173.45,189.22Zm36.8,63.08H178.71v31.53H168.2V252.3H136.66V241.78H168.2V210.25h10.51v31.53h31.54Z"/></g></g></svg>        </div>
+          <div id="logoAndLabelF">
+            <svg class="dropicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 263.28 304.86"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M180.16,41.57h4.29c22.33.16,33.45,2.46,45,8.62a60.87,60.87,0,0,1,25.28,25.35h0l1,2c5.06,10.2,7.17,20.9,7.48,40.21h0l0,5.24V223.49l0,5c-.32,20.71-2.61,31.36-8.6,42.55A60.87,60.87,0,0,1,229.3,296.3h0l-2,1c-10.2,5.06-20.9,7.17-40.21,7.48h0l-5.24,0H81.36l-5,0c-20.71-.32-31.36-2.61-42.55-8.59A60.9,60.9,0,0,1,8.55,270.88h0l-1-2C2.2,258.17.16,247,0,225.91H0V120.39C.16,98.07,2.45,87,8.62,75.42A60.9,60.9,0,0,1,34,50.13h0l2-1c10.69-5.31,21.88-7.35,42.95-7.51h4.19a10.4,10.4,0,1,1,0,20.79h0l-6.42,0c-16.51.25-24.33,1.77-31.33,5.24h0l-1.74.9A40,40,0,0,0,27,85.22c-4.22,7.9-5.91,15.57-6.14,33.18h0l0,4.62V225.83c.13,18.1,1.63,26.32,5.26,33.64h0l.9,1.74A40,40,0,0,0,43.64,277.9c8,4.26,15.44,5.86,33,6.14h0l4.81,0H181.83c19.76,0,28.45-1.5,36.06-5.28h0l1.74-.89a40.09,40.09,0,0,0,16.69-16.69c4.26-8,5.86-15.44,6.13-33h0l0-4.81V123c0-19.76-1.5-28.45-5.28-36.06h0l-.89-1.74a40,40,0,0,0-16.69-16.69c-8.56-4.57-16.84-6.17-37.8-6.17h-1.67a10.4,10.4,0,0,1,0-20.79Z"/><path d="M131.63,0A10.4,10.4,0,0,1,142,10.39h0V200.08l34.23-34.21a10.39,10.39,0,0,1,13.91-.72l.79.72a10.38,10.38,0,0,1,0,14.69h0l-52,52a10.39,10.39,0,0,1-14.7,0h0l-52-52A10.39,10.39,0,1,1,87,165.87h0l34.22,34.21V10.39A10.39,10.39,0,0,1,130.63.05Z"/></g></g></svg>
+            <h2 class="droptext">Download</h2>
+          </div>
+          <div id="logoAndLabelS">
+            <svg class="dropicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 329.41 304.86"><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><path d="M0,159.49c1.62-7,3.1-14,6.16-20.54,4.63-10,10.88-18.69,19.45-25.59,2.76-2.22,3.73-4.27,3.33-8.07-3.43-33,22.46-60.22,55.5-58.19C89.55,47.41,91.87,46,94.6,42c17-24.59,40.52-38.45,70.31-41.54,46.32-4.8,90.76,26.75,101.44,72.34,1.13,4.84,3.08,7,7.79,8.85,30.58,11.74,48.74,34.38,54.13,66.36,7.06,41.91-19.21,82.28-60.08,94.07A73.19,73.19,0,0,1,247.91,245q-21.21,0-42.42,0a31.72,31.72,0,0,1-5.42-.45,9.35,9.35,0,0,1-.25-18.31,29.91,29.91,0,0,1,5.75-.5c13.6,0,27.2-.16,40.81,0,21.13.27,37.73-8.76,50.32-25.11a65.73,65.73,0,0,0-16.59-95.42,57.94,57.94,0,0,0-19.49-8c-7.93-1.7-9.69-3.6-10.91-11.62-3.86-25.35-16.55-44.89-39.15-57.13-24.38-13.2-49.28-12.89-73.76.06-14.13,7.47-24.58,18.76-31.8,33-3,6-7,7.72-13.46,5.92C76.53,63.24,64,67,54.3,79.22c-6.57,8.34-8.11,18-5.71,28.26.31,1.35.73,2.68,1,4,1.09,5.25-1.24,8.89-5.53,11.58a51.29,51.29,0,0,0-15.36,14.41,56.28,56.28,0,0,0,3.38,68.34c8.24,9.86,18.36,16.62,31.05,19.21a51.28,51.28,0,0,0,10.2,1q26.5,0,53,0c5.32,0,8.85,2.57,9.89,7a9.33,9.33,0,0,1-7.37,11.57,26.33,26.33,0,0,1-5.1.41q-24.9,0-49.81,0c-25.55,0-45.21-11.37-60-31.71A74.64,74.64,0,0,1,.42,179,12.26,12.26,0,0,0,0,177.48Z"/><path d="M154.49,146.76c-1.47.37-2.12,1.43-2.93,2.24q-13.65,13.6-27.26,27.25c-2.24,2.24-4.62,4.1-8.06,4a9.21,9.21,0,0,1-8.23-4.72,8.61,8.61,0,0,1,.14-9.44,21.45,21.45,0,0,1,3-3.69q22.35-22.41,44.74-44.76c.6-.61,1.22-1.2,1.87-1.76,4.56-3.92,9.48-4,13.78.26q24,23.73,47.7,47.69c4.12,4.16,4.13,9.74.44,13.55s-9.47,4-13.76-.17c-9.81-9.56-19.41-19.34-29.11-29-.66-.66-1.09-1.59-2.2-1.87-.84,1.15-.42,2.47-.42,3.68q0,70.66,0,141.33a26.3,26.3,0,0,1-.49,6.07,9.34,9.34,0,0,1-18.39-.54,45.56,45.56,0,0,1-.41-6.4q0-69.71,0-139.4C154.9,149.71,155.17,148.3,154.49,146.76Z"/></g></g></svg>
+            <h2 class="droptext">Upload</h2>
+          </div>
+          <script>
+              const newGame = document.getElementById('NG');
+              newGame.addEventListener('click', () => {
+                localStorage.removeItem('csvData');
+                clearTable()
+                var firstdiv = document.getElementById("initial-side-panel");
+                firstdiv.style.display = "block";
+                var seconddiv = document.getElementById("side-panel");
+                seconddiv.style.display = "none";
+                document.getElementById("playersnames").textContent = '';
+                document.getElementById("playercount").textContent = '-';
+                document.getElementById("gameType").textContent = '-';
+                ResetStats();
+
+              });
+
+          </script>
+          <script>
+            const entity = document.querySelector('.doc-button');
+            const infoBoxF = document.getElementById('logoAndLabelF');
+            const infoBoxS = document.getElementById('logoAndLabelS');
+
+            entity.addEventListener('mouseover', () => {
+              infoBoxF.style.display = 'block';
+              infoBoxS.style.display = 'block';
+            });
+
+            entity.addEventListener('click', (event) => {
+              event.stopPropagation(); // Prevent the click from propagating to the document
+            });
+
+            document.addEventListener('click', () => {
+              infoBoxF.style.display = 'none';
+              infoBoxS.style.display = 'none';
+
+            });
+
+          </script>
+          <!-- Overlay for uploading CSV -->
+          <div class="uploadoverlay" id="uploadoverlay">
+              <div class="uploadoverlay-content">
+                  <h3>Upload Game File</h3>
+                  <p>Current Game will be </p>
+                  <input type="file" id="csvFileInput" accept=".csv">
+                  <button id="uploadCSVButton">Upload</button>
+                  <button id="closeOverlayButton">Close</button>
+              </div>
+          </div>
+
+          <script>
+              const uploadoverlay = document.getElementById('uploadoverlay');
+              const uploadButton = document.getElementById('logoAndLabelS');
+              const csvFileInput = document.getElementById('csvFileInput');
+              const uploadCSVButton = document.getElementById('uploadCSVButton');
+              const closeOverlayButton = document.getElementById('closeOverlayButton');
+
+              uploadButton.addEventListener('click', () => {
+                  uploadoverlay.style.display = 'flex';
+              });
+
+              closeOverlayButton.addEventListener('click', () => {
+                  uploadoverlay.style.display = 'none';
+              });
+
+              uploadCSVButton.addEventListener('click', () => {
+                  const file = csvFileInput.files[0];
+                  if (!file) {
+                      alert('Please select a CSV file.');
+                      return;
+                  }
+
+                  const reader = new FileReader();
+                  reader.onload = function(event) {
+                      const csvData = event.target.result;
+                      localStorage.setItem('csvData', csvData);
+                      uploadoverlay.style.display = 'none';
+                      window.clearTable();
+                      window.createTable();
+                      getPlayerName();
+                      getRoundNum();
+                      headerDetails();
+                      ResetStats();
+                      var firstdiv = document.getElementById("initial-side-panel");
+                      firstdiv.style.display = "none";
+                      var seconddiv = document.getElementById("side-panel");
+                      seconddiv.style.display = "block";
+
+                  };
+                  reader.readAsText(file);
+              });
+          </script>
+          <script>
+            function downloadCSV() {
+              console.log("in");  
+              const csvData = localStorage.getItem('csvData');
+                if (!csvData) {
+                    console.error('CSV data not found in local storage.');
+                    return;
+                }
+
+                const blob = new Blob([csvData], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'game.csv';
+                a.style.display = 'none';
+
+                document.body.appendChild(a);
+                a.click();
+
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+        }
+        const downloadButton = document.getElementById('logoAndLabelF');
+        downloadButton.addEventListener('click', downloadCSV);
+          </script>
+          <div class="main-main-panel">
+            <table id="data-table">
+              <!-- Table content will be generated here -->
+          </table>
+          <script>
+            window.createTable = function() {
+              const csvData = localStorage.getItem('csvData');
+              const rows = csvData.trim().split('\n');
+                const table = document.getElementById('data-table');
+    
+                for (let i = 0; i < rows.length; i++) {
+                    const row = rows[i].split(',');
+                    const tableRow = document.createElement('tr');
+    
+                    for (let j = 0; j < row.length; j++) {
+                        const cell = i === 0 ? 'th' : 'td';
+                        const tableCell = document.createElement(cell);
+                        tableCell.textContent = row[j];
+                        tableRow.appendChild(tableCell);
+                    }
+    
+                    if (i === 0) {
+                        const th = document.createElement('th');
+                        th.textContent = '#';
+                        tableRow.insertBefore(th, tableRow.firstChild);
+                    } else {
+                        const td = document.createElement('td');
+                        td.textContent = i-1;
+                        tableRow.insertBefore(td, tableRow.firstChild);
+                    }
+    
+                    table.appendChild(tableRow);
+                }
+            }
+    
+            window.clearTable=function() {
+                // Find the parent element (div) that contains the table
+                const mainPanel = document.querySelector('.main-main-panel');
+
+                // Find the table element by its ID
+                const dataTable = document.getElementById('data-table');
+
+                // Remove the table from its parent
+                mainPanel.removeChild(dataTable);
+                var table = document.createElement("table");
+                table.setAttribute("id", "data-table");
+                mainPanel.appendChild(table);
+            } 
+        </script>
+    
+          
+        </div>
+    </div>
+    <div id="initial-side-panel">
+        <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 896.64 375.11"><defs><style>.cls-1{fill:#009fe3;}.cls-2{fill:#fff;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle class="cls-1" cx="187.56" cy="187.56" r="187.56"/><path class="cls-2" d="M188.44,27.47q13.31,0,22.49,3.94a29.82,29.82,0,0,1,13.92,11.4q4.74,7.45,4.54,18.55t-5.65,25.22q-5.25,13.92-10.19,25.72t-9.78,23.31a115.93,115.93,0,0,1-10.9,21.28,43.92,43.92,0,0,1-11.9,12.2,35.63,35.63,0,0,1-14.32,5.45,121.91,121.91,0,0,1-18.36,1.21H79.9L139,27.47Zm-5.05,43.17q1.41-3.63-.1-6.25a5.26,5.26,0,0,0-4.94-2.62h-8.07l-33.49,83.72h8.07a12.41,12.41,0,0,0,7.06-2.52,13.18,13.18,0,0,0,5-6.36Z"/><path class="cls-2" d="M309.28,25.05q13.31,0,22.09,2.42t13.82,6.66a22.12,22.12,0,0,1,7,9.88,28.4,28.4,0,0,1,1.31,11.91,30.17,30.17,0,0,1-2,10.89L307.26,175.75H263.68l13.12-33.69H258.44l-13.52,33.69H200.34l49-121.24a43.11,43.11,0,0,1,6.86-12.11,35.9,35.9,0,0,1,7.16-7.46,36.86,36.86,0,0,1,10.39-5.45,72.41,72.41,0,0,1,14.93-3.33A164.73,164.73,0,0,1,309.28,25.05Zm-4.64,45.59q1.61-3.63.2-6.25A5,5,0,0,0,300,61.77a12,12,0,0,0-7.17,2.62,15.77,15.77,0,0,0-5.14,6.25l-12.51,30.47h17.55Z"/><path class="cls-2" d="M444.24,27.67q11.49,1,18.36,5.45a27.6,27.6,0,0,1,10.08,11,28.63,28.63,0,0,1,2.83,14.32,48.91,48.91,0,0,1-3.43,15.43,57.52,57.52,0,0,1-7.67,13.82,67.79,67.79,0,0,1-9.38,10,54.23,54.23,0,0,1-10.19,7c-3.5,1.81-6.86,3.4-10.08,4.74q9.27,3,11.49,12.91t-3,23l-12.31,30.46H393.2a7.94,7.94,0,0,1-5.15-2.12q-2.52-2.12-.91-6.35L400.66,134q1.41-3.63-.4-6.25a6,6,0,0,0-5.25-2.63h-8.67L366,175.75H321.38L380.89,27.47h63.35Zm-19,43q1.41-3.63-.1-6.25a5.25,5.25,0,0,0-4.94-2.62h-8.07L402.68,85H411a11.66,11.66,0,0,0,7-2.62,15.72,15.72,0,0,0,5.14-6.26Z"/><path class="cls-2" d="M589.08,61.77H553l-46.4,114H463.4l46.4-114H474.7l13.92-34.3H603Z"/><path class="cls-2" d="M653.44,25.05q14.52,0,25,3.91t16.24,11a30,30,0,0,1,6.46,17.27q.71,10.16-4.34,22.67H660.9a11.51,11.51,0,0,1-6.35-1.62c-1.69-1.07-2.19-3-1.52-5.85.14-.53.27-1,.41-1.41s.27-.87.4-1.41a3,3,0,0,0,.61-1.82,19.08,19.08,0,0,0,.8-7.36q-.4-2.93-4.44-2.93a10.87,10.87,0,0,0-8.06,3c-2,2-4,5.39-5.86,10.11a7.27,7.27,0,0,0,1.62,7.88,61.2,61.2,0,0,0,8.67,7.78q5.45,4.14,11.6,9.09a48.59,48.59,0,0,1,10.49,11.72,36.2,36.2,0,0,1,5.35,15.66q1,8.89-3.83,20.82a67.32,67.32,0,0,1-8.88,16.27,40.11,40.11,0,0,1-12.2,10.6,52.6,52.6,0,0,1-16.65,5.76A125.43,125.43,0,0,1,610.87,178q-14.52,0-25-3.83t-16.24-11a30.31,30.31,0,0,1-6.45-17.35q-.7-10.18,4.34-22.89h35.7a10.25,10.25,0,0,1,7.06,2.32q2.63,2.31,0,8.17a5.12,5.12,0,0,0-.5,1.41,6,6,0,0,0-.1,1,16.48,16.48,0,0,0-.5,6.86c.33,1.88,1.78,2.82,4.33,2.82a10.91,10.91,0,0,0,8.07-3q3-3,5.85-10.08,1.62-4-1.61-7.77a57.39,57.39,0,0,0-8.68-7.87q-5.45-4.12-11.6-9.18A51.05,51.05,0,0,1,595,95.86a35.44,35.44,0,0,1-5.34-15.63q-1-9,3.83-20.88a66.41,66.41,0,0,1,8.88-16.24,40.08,40.08,0,0,1,12.2-10.59,52.67,52.67,0,0,1,16.65-5.75A126.3,126.3,0,0,1,653.44,25.05Z"/><path class="cls-2" d="M242.36,187.55q14.53,0,25,3.92t16.24,11a30.12,30.12,0,0,1,6.45,17.28q.71,10.15-4.33,22.66H249.83a11.55,11.55,0,0,1-6.36-1.62c-1.68-1.07-2.19-3-1.51-5.85.13-.53.27-1,.4-1.41s.27-.87.41-1.41a3,3,0,0,0,.6-1.82,18.9,18.9,0,0,0,.81-7.36q-.41-2.93-4.44-2.93a10.91,10.91,0,0,0-8.07,3q-3,3-5.85,10.1a7.25,7.25,0,0,0,1.61,7.88,60.73,60.73,0,0,0,8.68,7.78q5.44,4.14,11.6,9.1a48.61,48.61,0,0,1,10.49,11.72,36.1,36.1,0,0,1,5.34,15.66q1,8.88-3.83,20.81a67.32,67.32,0,0,1-8.88,16.27A40.15,40.15,0,0,1,238.63,333,52.78,52.78,0,0,1,222,338.75a125.55,125.55,0,0,1-22.2,1.72q-14.52,0-25-3.83t-16.24-11a30.39,30.39,0,0,1-6.46-17.34q-.71-10.19,4.34-22.9h35.71a10.25,10.25,0,0,1,7.06,2.32q2.63,2.32,0,8.17a4.91,4.91,0,0,0-.5,1.41,6.15,6.15,0,0,0-.11,1,16.65,16.65,0,0,0-.5,6.86q.49,2.82,4.34,2.82a10.94,10.94,0,0,0,8.07-3q3-3,5.85-10.09,1.6-4-1.62-7.77a57.8,57.8,0,0,0-8.67-7.87q-5.45-4.12-11.6-9.17A50.87,50.87,0,0,1,184,258.36a35.24,35.24,0,0,1-5.35-15.63q-1-9,3.83-20.88a67.08,67.08,0,0,1,8.88-16.24A40,40,0,0,1,203.53,195a52.7,52.7,0,0,1,16.64-5.75A126.38,126.38,0,0,1,242.36,187.55Z"/><path class="cls-2" d="M401.73,200.06q10.69,12.51,5.45,35.71a7,7,0,0,1-.3,1.51,10.12,10.12,0,0,1-.5,1.52,10.4,10.4,0,0,1-5.86,6.65,23.28,23.28,0,0,1-9.28,1.82H355.33L361,233.15q1.62-3.63.1-6.26c-1-1.74-2.72-2.62-5.14-2.62q-5,0-7.26,1.92c-1.48,1.28-2.9,3.66-4.24,7.16l-25.22,62.54c-2,5.11-2.59,8.41-1.71,9.88s2.59,2.22,5.14,2.22a12.7,12.7,0,0,0,7.27-1.91q2.82-1.92,4.84-7l5.85-14.53h36.92q4.64,0,7.06,1.82t.6,6.45a30.32,30.32,0,0,1-1.31,3,31.16,31.16,0,0,0-1.31,3,126.74,126.74,0,0,1-11.2,22,44.45,44.45,0,0,1-12.1,12.61,36.78,36.78,0,0,1-14.73,5.65,120.73,120.73,0,0,1-18.86,1.31H305.3A53.92,53.92,0,0,1,288.76,338a26.07,26.07,0,0,1-12.71-8.57q-4.85-6.06-5.45-16t5.25-24.92l7.67-19.16q3.42-8.47,7.46-18.56t8.07-20a83.25,83.25,0,0,1,9.48-17.66,61.5,61.5,0,0,1,13.11-13.61,59.16,59.16,0,0,1,16.55-8.78A60.44,60.44,0,0,1,358,187.55h8.87Q391,187.55,401.73,200.06Z"/><path class="cls-2" d="M490.1,187.55q13.51,0,23,4a30.05,30.05,0,0,1,14.33,11.9q4.85,7.88,4.74,19.27t-5.75,25.92Q521.16,262.81,516,275t-10.19,23.9a126.79,126.79,0,0,1-11.19,22,44.47,44.47,0,0,1-12.11,12.61,36.78,36.78,0,0,1-14.73,5.65,120.63,120.63,0,0,1-18.86,1.31H428.57A53.94,53.94,0,0,1,412,338a26.07,26.07,0,0,1-12.71-8.57q-4.83-6.06-5.44-16t5.24-24.92l7.67-19.16q3.42-8.47,7.46-18.56t8.07-20a84.16,84.16,0,0,1,9.48-17.66,61.54,61.54,0,0,1,13.12-13.61,59.1,59.1,0,0,1,16.54-8.78,60.44,60.44,0,0,1,19.77-3.13Zm-5.85,45.6c1.07-2.42,1.11-4.51.1-6.26a5.48,5.48,0,0,0-5.15-2.62q-5,0-7.26,1.92c-1.48,1.28-2.89,3.66-4.24,7.16l-25.21,62.54q-3,7.67-1.72,9.88c.87,1.49,2.59,2.22,5.15,2.22a12.69,12.69,0,0,0,7.26-1.91q2.82-1.92,4.84-7Z"/><path class="cls-2" d="M624.86,190.18q11.49,1,18.35,5.44a27.56,27.56,0,0,1,10.09,11,28.66,28.66,0,0,1,2.83,14.32,49.24,49.24,0,0,1-3.43,15.44A57.44,57.44,0,0,1,645,250.19a66.8,66.8,0,0,1-9.38,10,54.23,54.23,0,0,1-10.19,7q-5.25,2.73-10.09,4.74,9.28,3,11.5,12.91t-3,23l-12.31,30.46H573.82a8,8,0,0,1-5.15-2.11q-2.52-2.13-.91-6.36l13.52-33.29q1.41-3.63-.4-6.25a6,6,0,0,0-5.25-2.62H567l-20.38,50.63H502L561.51,190h63.35Zm-19,43q1.41-3.63-.1-6.26a5.28,5.28,0,0,0-4.94-2.62h-8.07l-9.48,23.2h8.27a11.7,11.7,0,0,0,7-2.62,15.72,15.72,0,0,0,5.14-6.26Z"/><path class="cls-2" d="M789.47,190l-14.93,36.72H709.18l-8.07,18.76h52.66L739.44,281H687.19l-7.87,18.76h65.37l-15.54,38.53H620.21L680.53,190Z"/><path class="cls-2" d="M865.33,190.18q11.49,1,18.36,5.44a27.6,27.6,0,0,1,10.08,11,28.66,28.66,0,0,1,2.83,14.32,49,49,0,0,1-3.43,15.44,57.44,57.44,0,0,1-7.67,13.81,66.8,66.8,0,0,1-9.38,10,54.23,54.23,0,0,1-10.19,7q-5.25,2.73-10.09,4.74,9.28,3,11.5,12.91t-3,23L852,338.25H814.29a8,8,0,0,1-5.15-2.11q-2.52-2.13-.91-6.36l13.52-33.29q1.41-3.63-.4-6.25a6,6,0,0,0-5.25-2.62h-8.67l-20.38,50.63H742.47L802,190h63.35Zm-19,43q1.41-3.63-.1-6.26a5.27,5.27,0,0,0-4.94-2.62h-8.07l-9.48,23.2H832a11.66,11.66,0,0,0,7-2.62,15.72,15.72,0,0,0,5.14-6.26Z"/></g></g></svg>
+        <form id="playersForm">
+            <label class="main-label">Number of Players</label>
+            <input type="number" id="numPlayers" name="numPlayers" min="2" max="10" value="2" required>
+            <br>
+            <label class="main-label">Player Names</label>
+            <div id="playerFields">
+              <!-- Player name fields will be dynamically added here -->
+            </div>
+            <br>
+            <label class="main-label">Game Type</label>
+            <div class="radio-container">
+              <input type="radio" class="custom-radio" id="radio1" name="gameType" value="301" required>
+              <label for="radio1" class="custom-radio-label">301</label>
+            
+              <input type="radio" class="custom-radio" id="radio2" name="gameType" value="501" required>
+              <label for="radio2" class="custom-radio-label">501</label>
+
+              <input type="radio" class="custom-radio" id="radio3" name="gameType" value="801" required>
+              <label for="radio3" class="custom-radio-label">801</label>
+            
+              <input type="radio" class="custom-radio" id="radio4" name="gameType" value="1001" required>
+              <label for="radio4" class="custom-radio-label">1001</label>
+            </div>            
+            <div class="submit-container">
+              <button class="submitbutton" type="submit">Play</button>
+            </div>
+        </form>
+          <script>
+            const numPlayersInput = document.getElementById('numPlayers');
+            const playerFieldsDiv = document.getElementById('playerFields');
+            const playerInputs = [];
+        
+            numPlayersInput.addEventListener('input', handleNumPlayersInput);
+        
+            function handleNumPlayersInput() {
+                let numPlayers = parseInt(numPlayersInput.value);
+
+                // Validate and adjust the input value
+                if (numPlayers < parseInt(numPlayersInput.min)) {
+                    numPlayers = parseInt(numPlayersInput.min);
+                } else if (numPlayers > parseInt(numPlayersInput.max)) {
+                    numPlayers = parseInt(numPlayersInput.max);
+                }
+
+                numPlayersInput.value = numPlayers; // Update the input value
+                updatePlayerFields();
+                }
+            
+            function updatePlayerFields() {
+              const numPlayers = parseInt(numPlayersInput.value);
+              const currentNumPlayers = playerInputs.length;
+        
+              if (numPlayers < currentNumPlayers) {
+                for (let i = currentNumPlayers; i > numPlayers; i--) {
+                  playerFieldsDiv.removeChild(playerInputs.pop());
+                  playerFieldsDiv.removeChild(playerFieldsDiv.lastChild); // Remove the corresponding <br> tag
+                }
+              } else if (numPlayers > currentNumPlayers) {
+                for (let i = currentNumPlayers + 1; i <= numPlayers; i++) {
+                  const playerNameInput = document.createElement('input');
+                  playerNameInput.type = 'text';
+                  playerNameInput.className = 'inputNamePlayer';
+                  playerNameInput.required = true;
+                  playerNameInput.name = 'player' + i;
+                  playerNameInput.placeholder = 'Player ' + i + ' Name';
+        
+                  playerFieldsDiv.appendChild(playerNameInput);
+                  playerFieldsDiv.appendChild(document.createElement('br'));
+                  playerInputs.push(playerNameInput);
+                }
+              }
+            }
+        
+            // Initial update
+            updatePlayerFields();
+        
+
+            document.getElementById('playersForm').addEventListener('submit', function(event) {
+              event.preventDefault();
+              const form = event.target;
+              const formData = new FormData(form);
+              
+              // Display player names (you can modify this part as needed)
+              var CreateCSV = ``;
+              var count = 0;
+              for (const [key, value] of formData.entries()) {
+                
+                if (key==='numPlayers') {
+                  var numOfPlayers = value;
+                }
+
+                if (key==='gameType') {
+                  var Type=value;
+                }
+                if (key.includes('player')) {
+                  count=count+1;
+                  if (count===1) {
+                    CreateCSV = CreateCSV+value;
+                  } else {
+                    CreateCSV = CreateCSV+','+value;
+                  }
+                }
+              }
+              CreateCSV = CreateCSV + '\n';
+              for (var i = 0; i < numOfPlayers; i++) {
+                if (i===0) {
+                  CreateCSV = CreateCSV+Type;
+                } else {
+                  CreateCSV = CreateCSV+','+Type;
+                }
+              }
+              localStorage.setItem('csvData',CreateCSV);
+              createTable();
+              getPlayerName();
+              getRoundNum();
+              headerDetails();
+
+              var firstdiv = document.getElementById("initial-side-panel");
+              firstdiv.style.display = "none";
+              var seconddiv = document.getElementById("side-panel");
+              seconddiv.style.display = "block";
+            });
+
+          </script>
+    </div>
+    <div id="side-panel">
+      <svg class="logo" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 896.64 375.11"><defs><style>.cls-1{fill:#009fe3;}.cls-2{fill:#fff;}</style></defs><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle class="cls-1" cx="187.56" cy="187.56" r="187.56"/><path class="cls-2" d="M188.44,27.47q13.31,0,22.49,3.94a29.82,29.82,0,0,1,13.92,11.4q4.74,7.45,4.54,18.55t-5.65,25.22q-5.25,13.92-10.19,25.72t-9.78,23.31a115.93,115.93,0,0,1-10.9,21.28,43.92,43.92,0,0,1-11.9,12.2,35.63,35.63,0,0,1-14.32,5.45,121.91,121.91,0,0,1-18.36,1.21H79.9L139,27.47Zm-5.05,43.17q1.41-3.63-.1-6.25a5.26,5.26,0,0,0-4.94-2.62h-8.07l-33.49,83.72h8.07a12.41,12.41,0,0,0,7.06-2.52,13.18,13.18,0,0,0,5-6.36Z"/><path class="cls-2" d="M309.28,25.05q13.31,0,22.09,2.42t13.82,6.66a22.12,22.12,0,0,1,7,9.88,28.4,28.4,0,0,1,1.31,11.91,30.17,30.17,0,0,1-2,10.89L307.26,175.75H263.68l13.12-33.69H258.44l-13.52,33.69H200.34l49-121.24a43.11,43.11,0,0,1,6.86-12.11,35.9,35.9,0,0,1,7.16-7.46,36.86,36.86,0,0,1,10.39-5.45,72.41,72.41,0,0,1,14.93-3.33A164.73,164.73,0,0,1,309.28,25.05Zm-4.64,45.59q1.61-3.63.2-6.25A5,5,0,0,0,300,61.77a12,12,0,0,0-7.17,2.62,15.77,15.77,0,0,0-5.14,6.25l-12.51,30.47h17.55Z"/><path class="cls-2" d="M444.24,27.67q11.49,1,18.36,5.45a27.6,27.6,0,0,1,10.08,11,28.63,28.63,0,0,1,2.83,14.32,48.91,48.91,0,0,1-3.43,15.43,57.52,57.52,0,0,1-7.67,13.82,67.79,67.79,0,0,1-9.38,10,54.23,54.23,0,0,1-10.19,7c-3.5,1.81-6.86,3.4-10.08,4.74q9.27,3,11.49,12.91t-3,23l-12.31,30.46H393.2a7.94,7.94,0,0,1-5.15-2.12q-2.52-2.12-.91-6.35L400.66,134q1.41-3.63-.4-6.25a6,6,0,0,0-5.25-2.63h-8.67L366,175.75H321.38L380.89,27.47h63.35Zm-19,43q1.41-3.63-.1-6.25a5.25,5.25,0,0,0-4.94-2.62h-8.07L402.68,85H411a11.66,11.66,0,0,0,7-2.62,15.72,15.72,0,0,0,5.14-6.26Z"/><path class="cls-2" d="M589.08,61.77H553l-46.4,114H463.4l46.4-114H474.7l13.92-34.3H603Z"/><path class="cls-2" d="M653.44,25.05q14.52,0,25,3.91t16.24,11a30,30,0,0,1,6.46,17.27q.71,10.16-4.34,22.67H660.9a11.51,11.51,0,0,1-6.35-1.62c-1.69-1.07-2.19-3-1.52-5.85.14-.53.27-1,.41-1.41s.27-.87.4-1.41a3,3,0,0,0,.61-1.82,19.08,19.08,0,0,0,.8-7.36q-.4-2.93-4.44-2.93a10.87,10.87,0,0,0-8.06,3c-2,2-4,5.39-5.86,10.11a7.27,7.27,0,0,0,1.62,7.88,61.2,61.2,0,0,0,8.67,7.78q5.45,4.14,11.6,9.09a48.59,48.59,0,0,1,10.49,11.72,36.2,36.2,0,0,1,5.35,15.66q1,8.89-3.83,20.82a67.32,67.32,0,0,1-8.88,16.27,40.11,40.11,0,0,1-12.2,10.6,52.6,52.6,0,0,1-16.65,5.76A125.43,125.43,0,0,1,610.87,178q-14.52,0-25-3.83t-16.24-11a30.31,30.31,0,0,1-6.45-17.35q-.7-10.18,4.34-22.89h35.7a10.25,10.25,0,0,1,7.06,2.32q2.63,2.31,0,8.17a5.12,5.12,0,0,0-.5,1.41,6,6,0,0,0-.1,1,16.48,16.48,0,0,0-.5,6.86c.33,1.88,1.78,2.82,4.33,2.82a10.91,10.91,0,0,0,8.07-3q3-3,5.85-10.08,1.62-4-1.61-7.77a57.39,57.39,0,0,0-8.68-7.87q-5.45-4.12-11.6-9.18A51.05,51.05,0,0,1,595,95.86a35.44,35.44,0,0,1-5.34-15.63q-1-9,3.83-20.88a66.41,66.41,0,0,1,8.88-16.24,40.08,40.08,0,0,1,12.2-10.59,52.67,52.67,0,0,1,16.65-5.75A126.3,126.3,0,0,1,653.44,25.05Z"/><path class="cls-2" d="M242.36,187.55q14.53,0,25,3.92t16.24,11a30.12,30.12,0,0,1,6.45,17.28q.71,10.15-4.33,22.66H249.83a11.55,11.55,0,0,1-6.36-1.62c-1.68-1.07-2.19-3-1.51-5.85.13-.53.27-1,.4-1.41s.27-.87.41-1.41a3,3,0,0,0,.6-1.82,18.9,18.9,0,0,0,.81-7.36q-.41-2.93-4.44-2.93a10.91,10.91,0,0,0-8.07,3q-3,3-5.85,10.1a7.25,7.25,0,0,0,1.61,7.88,60.73,60.73,0,0,0,8.68,7.78q5.44,4.14,11.6,9.1a48.61,48.61,0,0,1,10.49,11.72,36.1,36.1,0,0,1,5.34,15.66q1,8.88-3.83,20.81a67.32,67.32,0,0,1-8.88,16.27A40.15,40.15,0,0,1,238.63,333,52.78,52.78,0,0,1,222,338.75a125.55,125.55,0,0,1-22.2,1.72q-14.52,0-25-3.83t-16.24-11a30.39,30.39,0,0,1-6.46-17.34q-.71-10.19,4.34-22.9h35.71a10.25,10.25,0,0,1,7.06,2.32q2.63,2.32,0,8.17a4.91,4.91,0,0,0-.5,1.41,6.15,6.15,0,0,0-.11,1,16.65,16.65,0,0,0-.5,6.86q.49,2.82,4.34,2.82a10.94,10.94,0,0,0,8.07-3q3-3,5.85-10.09,1.6-4-1.62-7.77a57.8,57.8,0,0,0-8.67-7.87q-5.45-4.12-11.6-9.17A50.87,50.87,0,0,1,184,258.36a35.24,35.24,0,0,1-5.35-15.63q-1-9,3.83-20.88a67.08,67.08,0,0,1,8.88-16.24A40,40,0,0,1,203.53,195a52.7,52.7,0,0,1,16.64-5.75A126.38,126.38,0,0,1,242.36,187.55Z"/><path class="cls-2" d="M401.73,200.06q10.69,12.51,5.45,35.71a7,7,0,0,1-.3,1.51,10.12,10.12,0,0,1-.5,1.52,10.4,10.4,0,0,1-5.86,6.65,23.28,23.28,0,0,1-9.28,1.82H355.33L361,233.15q1.62-3.63.1-6.26c-1-1.74-2.72-2.62-5.14-2.62q-5,0-7.26,1.92c-1.48,1.28-2.9,3.66-4.24,7.16l-25.22,62.54c-2,5.11-2.59,8.41-1.71,9.88s2.59,2.22,5.14,2.22a12.7,12.7,0,0,0,7.27-1.91q2.82-1.92,4.84-7l5.85-14.53h36.92q4.64,0,7.06,1.82t.6,6.45a30.32,30.32,0,0,1-1.31,3,31.16,31.16,0,0,0-1.31,3,126.74,126.74,0,0,1-11.2,22,44.45,44.45,0,0,1-12.1,12.61,36.78,36.78,0,0,1-14.73,5.65,120.73,120.73,0,0,1-18.86,1.31H305.3A53.92,53.92,0,0,1,288.76,338a26.07,26.07,0,0,1-12.71-8.57q-4.85-6.06-5.45-16t5.25-24.92l7.67-19.16q3.42-8.47,7.46-18.56t8.07-20a83.25,83.25,0,0,1,9.48-17.66,61.5,61.5,0,0,1,13.11-13.61,59.16,59.16,0,0,1,16.55-8.78A60.44,60.44,0,0,1,358,187.55h8.87Q391,187.55,401.73,200.06Z"/><path class="cls-2" d="M490.1,187.55q13.51,0,23,4a30.05,30.05,0,0,1,14.33,11.9q4.85,7.88,4.74,19.27t-5.75,25.92Q521.16,262.81,516,275t-10.19,23.9a126.79,126.79,0,0,1-11.19,22,44.47,44.47,0,0,1-12.11,12.61,36.78,36.78,0,0,1-14.73,5.65,120.63,120.63,0,0,1-18.86,1.31H428.57A53.94,53.94,0,0,1,412,338a26.07,26.07,0,0,1-12.71-8.57q-4.83-6.06-5.44-16t5.24-24.92l7.67-19.16q3.42-8.47,7.46-18.56t8.07-20a84.16,84.16,0,0,1,9.48-17.66,61.54,61.54,0,0,1,13.12-13.61,59.1,59.1,0,0,1,16.54-8.78,60.44,60.44,0,0,1,19.77-3.13Zm-5.85,45.6c1.07-2.42,1.11-4.51.1-6.26a5.48,5.48,0,0,0-5.15-2.62q-5,0-7.26,1.92c-1.48,1.28-2.89,3.66-4.24,7.16l-25.21,62.54q-3,7.67-1.72,9.88c.87,1.49,2.59,2.22,5.15,2.22a12.69,12.69,0,0,0,7.26-1.91q2.82-1.92,4.84-7Z"/><path class="cls-2" d="M624.86,190.18q11.49,1,18.35,5.44a27.56,27.56,0,0,1,10.09,11,28.66,28.66,0,0,1,2.83,14.32,49.24,49.24,0,0,1-3.43,15.44A57.44,57.44,0,0,1,645,250.19a66.8,66.8,0,0,1-9.38,10,54.23,54.23,0,0,1-10.19,7q-5.25,2.73-10.09,4.74,9.28,3,11.5,12.91t-3,23l-12.31,30.46H573.82a8,8,0,0,1-5.15-2.11q-2.52-2.13-.91-6.36l13.52-33.29q1.41-3.63-.4-6.25a6,6,0,0,0-5.25-2.62H567l-20.38,50.63H502L561.51,190h63.35Zm-19,43q1.41-3.63-.1-6.26a5.28,5.28,0,0,0-4.94-2.62h-8.07l-9.48,23.2h8.27a11.7,11.7,0,0,0,7-2.62,15.72,15.72,0,0,0,5.14-6.26Z"/><path class="cls-2" d="M789.47,190l-14.93,36.72H709.18l-8.07,18.76h52.66L739.44,281H687.19l-7.87,18.76h65.37l-15.54,38.53H620.21L680.53,190Z"/><path class="cls-2" d="M865.33,190.18q11.49,1,18.36,5.44a27.6,27.6,0,0,1,10.08,11,28.66,28.66,0,0,1,2.83,14.32,49,49,0,0,1-3.43,15.44,57.44,57.44,0,0,1-7.67,13.81,66.8,66.8,0,0,1-9.38,10,54.23,54.23,0,0,1-10.19,7q-5.25,2.73-10.09,4.74,9.28,3,11.5,12.91t-3,23L852,338.25H814.29a8,8,0,0,1-5.15-2.11q-2.52-2.13-.91-6.36l13.52-33.29q1.41-3.63-.4-6.25a6,6,0,0,0-5.25-2.62h-8.67l-20.38,50.63H742.47L802,190h63.35Zm-19,43q1.41-3.63-.1-6.26a5.27,5.27,0,0,0-4.94-2.62h-8.07l-9.48,23.2H832a11.66,11.66,0,0,0,7-2.62,15.72,15.72,0,0,0,5.14-6.26Z"/></g></g></svg>
+      <h2 id="RoundNum" class="scoreTitle"></h2>
+      <h3 id="Player" class="scoreTitle"></h3>
+      <script>
+         // Parse the CSV data and extract the next round and player name
+          window.getRoundNum = function() {
+            const tableData = localStorage.getItem('csvData');        
+            const csvLines = tableData.split('\n');
+            var numRows = csvLines.length - 2;
+
+            const lastLine = csvLines[csvLines.length - 1];
+            const BottomLength = lastLine.split(',').length;
+
+            const header = csvLines[0];
+            const HeaderLength = header.split(',').length;
+
+            if (BottomLength===HeaderLength) {
+              numRows = numRows + 1;
+            }            
+            
+            document.getElementById("RoundNum").textContent = "Round "+numRows;
+          }
+
+          window.getPlayerName = function() {
+            const tableData = localStorage.getItem('csvData');        
+            const csvLines = tableData.split('\n');
+            const lastLine = csvLines[csvLines.length - 1];
+            var personKey = lastLine.split(',').length;
+            const header = csvLines[0];
+            const HeaderLength = header.split(',');
+            if (personKey===HeaderLength.length) {
+              personKey=0;
+            }
+
+            const playerName = HeaderLength[personKey];
+
+            document.getElementById("Player").textContent = playerName +"'s Turn!";
+          }
+
+
+
+
+      </script>
+      <form id="Dart">
+        <label class="main-label">First Dart</label>
+        <div class="scorePanel">
+          <input type="number" id="scoreInput1" class="scoreInput" name="score1" min="0" max="50" placeholder="Score" oninput="SetDart(0, 'scoreInput1')" required>
+          <input type="button" id="xTwo1" class="xTwo" value="x2" onclick="Double(0, 'xTwo1')">
+          <input type="button" id="xThree1" class="xThree" value="x3" onclick="Triple(0, 'xThree1')">
+        </div>
+        <br>
+        <label class="main-label">Second Dart</label>
+        <div class="scorePanel">
+          <input type="number" id="scoreInput2" class="scoreInput" name="score2" min="0" max="50" placeholder="Score" oninput="SetDart(1, 'scoreInput2')" required>
+          <input type="button" id="xTwo2" class="xTwo" value="x2" onclick="Double(1 , 'xTwo2')">
+          <input type="button" id="xThree2" class="xThree" value="x3" onclick="Triple(1, 'xThree2')">
+        </div>
+        <br>
+        <label class="main-label">Third Dart</label>
+        <div class="scorePanel">
+          <input type="number" id="scoreInput3" class="scoreInput" name="score3" min="0" max="50" placeholder="Score" oninput="SetDart(2, 'scoreInput3')" required>
+          <input type="button" id="xTwo3" class="xTwo" value="x2" onclick="Double(2 , 'xTwo3')">
+          <input type="button" id="xThree3" class="xThree" value="x3" onclick="Triple(2, 'xThree3')">
+        </div>
+        <br>
+        <label class="main-label">OR Already Calculated? Enter Total:</label>
+        <div class="scorePanel">
+          <input type="number" id="totalScore" name="totalScore" min="0" max="180" placeholder="Score" oninput="setValue()" required>
+        </div>
+        <br>
+        <label class="main-label">Total Score</label>
+        <h2 id="scoreTitle">0</h2>
+        <div class="submit-container">
+          <button class="submitbutton" type="submit">Confirm</button>
+        </div>
+        <script>
+          let darts = [0, 0, 0];
+          let multiplier = [1, 1, 1];
+          let totals = [0, 0, 0];
+          var score = 0;
+
+          window.ResetStats = function () {
+            darts = [0, 0, 0];
+            multiplier = [1, 1, 1];
+            totals = [0, 0, 0];
+            score = 0;
+            var totalInput = document.getElementById("totalScore");
+            var score1 = document.getElementById("scoreInput1");
+            var score2 = document.getElementById("scoreInput2");
+            var score3 = document.getElementById("scoreInput3");
+            totalInput.value = '';
+            score1.value = '';
+            score2.value = '';
+            score3.value = '';
+            Finalise()
+            checkEmptiness()
+          }
+
+          function SetDart(i, id) {
+            var value = document.getElementById(id).value;
+            if (value < 0) {
+              document.getElementById(id).value=0;
+              darts [i] = 0;
+            } else if (value > 50) {
+              document.getElementById(id).value=50;
+              darts [i] = 50;
+            } else {
+              darts[i] = document.getElementById(id).value;
+            }
+            Finalise()
+            checkEmptiness()
+          }
+
+          function Double(i, id) {
+            var buttonElement = document.getElementById(id);
+            if (multiplier[i] === 2) {
+              multiplier[i] = 1;
+              buttonElement.style.backgroundColor = "#008D1F";
+            } else {
+              multiplier[i] = 2;
+              buttonElement.style.backgroundColor = "#006616";
+            }
+            Finalise()
+          }
+
+          function Triple(i, id) {
+            var buttonElement = document.getElementById(id);
+            if (multiplier[i] === 3) {
+              multiplier[i] = 1;
+              buttonElement.style.backgroundColor = "#EA0013";
+            } else {
+              multiplier[i] = 3;
+              buttonElement.style.backgroundColor = "#96000c";
+            }
+            Finalise()
+          }
+          
+          function setValue() {
+            var value = document.getElementById("totalScore").value;
+            if (value < 0) {
+              document.getElementById("totalScore").value=0;
+              score = 0;
+            } else if (value > 180) {
+              document.getElementById("totalScore").value=180;
+              score = 180;
+            } else {
+              score = document.getElementById("totalScore").value;
+            }
+            Finalise()
+            checkEmptiness()
+
+          }
+
+          function checkEmptiness() {
+            var totalInput = document.getElementById("totalScore");
+            var score1 = document.getElementById("scoreInput1");
+            var score2 = document.getElementById("scoreInput2");
+            var score3 = document.getElementById("scoreInput3");
+            if (totalInput.value === '' && score1.value === '' && score2.value === '' && score3.value === '') {
+              totalInput.disabled = false;
+              score1.disabled = false;
+              score2.disabled = false;
+              score3.disabled = false;
+              totalInput.required = true;
+              score1.required = true;
+              score2.required = true;
+              score3.required = true;
+              score1.style.cursor = 'auto';
+              score2.style.cursor = 'auto';
+              score3.style.cursor = 'auto';
+              totalInput.style.cursor = 'auto';
+              document.getElementById("scoreTitle").textContent = 0;
+            } else if (totalInput.value !== '') {
+              score1.disabled = true;
+              score2.disabled = true;
+              score3.disabled = true;
+              score1.required = false;
+              score2.required = false;
+              score3.required = false;
+              totalInput.required = true;
+              score1.style.cursor = 'not-allowed';
+              score2.style.cursor = 'not-allowed';
+              score3.style.cursor = 'not-allowed';
+            } else if (score1.value !== '' || score2.value !== '' || score3.value !== '') {
+              totalInput.disabled = true;
+              totalInput.required = false;
+              totalInput.style.cursor = 'not-allowed';
+            }
+            }
+
+          function Finalise() {
+            totals[0] = darts[0] * multiplier[0];
+            totals[1] = darts[1] * multiplier[1];
+            totals[2] = darts[2] * multiplier[2];
+            var total = totals[0] + totals[1] + totals[2];
+            if (total > score) {
+              document.getElementById("scoreTitle").textContent = total;
+            } else {
+              document.getElementById("scoreTitle").textContent = score;
+            }
+          }
+
+          function getScore() {
+            totals[0] = darts[0] * multiplier[0];
+            totals[1] = darts[1] * multiplier[1];
+            totals[2] = darts[2] * multiplier[2];
+            var total = totals[0] + totals[1] + totals[2];
+            if (total > score) {
+              return total;           
+            } else {
+              return score;
+            }
+          }
+
+          function getLeftover() {
+            totalGo = getScore();
+            const tableData = localStorage.getItem('csvData');        
+            const csvLines = tableData.split('\n');
+            const lastLine = csvLines[csvLines.length - 1];
+            var personKey = lastLine.split(',').length;
+            const header = csvLines[0];
+            const HeaderLength = header.split(',');
+            var GetLine=0;
+            if (personKey===HeaderLength.length) {
+              personKey=0;
+              GetLine = csvLines[csvLines.length - 1];
+            } else {
+              GetLine = csvLines[csvLines.length - 2];
+            }
+            var LineAsArray = GetLine.split(',');
+            const lastValue = LineAsArray[personKey];
+            if (lastValue-totalGo<0) {
+              return lastValue;
+            } else {
+              return lastValue-totalGo;
+            }
+          }
+
+          document.getElementById('Dart').addEventListener('submit', function(event) {
+              event.preventDefault();
+              const form = event.target;
+              const formData = new FormData(form);
+              
+              const datafromCSV = localStorage.getItem('csvData');        
+              const csvLines = datafromCSV.split('\n');
+              const lastLine = csvLines[csvLines.length - 1];
+              const header = csvLines[0];
+              const HeaderLength = header.split(',');
+              var personKey = lastLine.split(',').length;
+              if (personKey===HeaderLength.length) {
+                var newCSVData = datafromCSV + '\n' + getLeftover(); //new line
+              } else {
+                var newCSVData = datafromCSV + `,`+getLeftover(); //same line
+              }
+              localStorage.setItem('csvData',newCSVData);
+              window.ResetStats()
+              window.getPlayerName()
+              window.getRoundNum()
+              window.clearTable()
+              window.createTable()
+            });
+          
+        </script>
+      </form>
+    </div>
+    <script>
+      data = localStorage.getItem('csvData');
+      if (data===null) {
+        var firstdiv = document.getElementById("initial-side-panel");
+        firstdiv.style.display = "block";
+        var seconddiv = document.getElementById("side-panel");
+        seconddiv.style.display = "none";
+      } else {
+        var firstdiv = document.getElementById("initial-side-panel");
+        firstdiv.style.display = "none";
+        var seconddiv = document.getElementById("side-panel");
+        seconddiv.style.display = "block";
+        createTable();
+        getPlayerName();
+        getRoundNum();
+        headerDetails();
+      }
+    </script>
+</body>
+</html>
