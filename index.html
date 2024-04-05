@@ -98,8 +98,8 @@
           <!-- Overlay for uploading CSV -->
           <div class="uploadoverlay" id="uploadoverlay">
               <div class="uploadoverlay-content">
-                  <h3>Upload Game File</h3>
-                  <p>Current Game will be </p>
+                  <h3 class="uploadText">Upload Game File</h3>
+                  <p class="uploadText">Current game will be lost.</p>
                   <input type="file" id="csvFileInput" accept=".csv">
                   <button id="uploadCSVButton">Upload</button>
                   <button id="closeOverlayButton">Close</button>
@@ -427,6 +427,8 @@
         <br>
         <label class="main-label">Total Score</label>
         <h2 id="scoreTitle">0</h2>
+        <label class="main-label">Remaining Score</label>
+        <h2 id="remainScoreTitle">0</h2>
         <div class="submit-container">
           <button class="submitbutton" type="submit">Confirm</button>
         </div>
@@ -546,15 +548,8 @@
             }
 
           function Finalise() {
-            totals[0] = darts[0] * multiplier[0];
-            totals[1] = darts[1] * multiplier[1];
-            totals[2] = darts[2] * multiplier[2];
-            var total = totals[0] + totals[1] + totals[2];
-            if (total > score) {
-              document.getElementById("scoreTitle").textContent = total;
-            } else {
-              document.getElementById("scoreTitle").textContent = score;
-            }
+            document.getElementById("scoreTitle").textContent = getScore();
+            document.getElementById("remainScoreTitle").textContent = getLeftover();
           }
 
           function getScore() {
